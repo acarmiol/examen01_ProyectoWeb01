@@ -66,7 +66,7 @@
           <!-- End of Registro -->
           </div>
           <div class="col-md-6">
-          <!-- Agregar Movimiento -->
+          <!-- Editar Registro y Movimiento -->
           <div ng-show="addMovementShow">
            
             <section id="title-bar">
@@ -105,33 +105,134 @@
 
            
           </div>
-          <!-- End of Agregar Movimiento -->
+          <!-- End of Editar y Agregar Movimiento -->
           </div>
 
           </div>
           </div>
+
+
 
           <!-- Registro/Lista de Cuentas -->
           <div>
           <section id="title-bar">
                 <div class="container">
                   <div class="row">
-                    <div class="col-md-8">
-                      <h1>Detalle de Transacción</h1>
-                      <p>A continuación el detalle de su transacción efectuada 02/15/16.</p>
+                    <div class="col-md-12">
+                      <h1>Lista de Cuentas || Total: {{account.length}}</h1>
+              
 
                     </div>
                   </div>
                 </div>
           </section>
 
+          <table class="table table-striped">
+            <thead>
+              <tr >
+                <th>Clientes</th>
+                <th>Tipo de Cuenta</th>
+                <th>Moneda</th>
+                <th>Acciones</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="accounts in account">
+                <td><a ng-click="showAccount(accounts)" class="btn btn-link">{{accounts.name}} </a></td>
+                <td>{{accounts.tipo.singleSelect}}</td>
+                <td>{{accounts.moneda.singleSelect}}</td>
+                <td>
+                  <a  ng-click="showEditForm(accounts)" class="btn btn-warning btn-xs">Editar </a> 
+                  <a ng-click="removeAccount(accounts)" class="btn btn-danger btn-xs">Remover</a>
+                  <a class="btn btn-link btn-xs">ver movimientos</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
 
           </div>
           <!-- End of Lista de Cuentas -->
 
+<!-- ///////////////////////////// -->
+
+
+ <!-- Resumen -->
+ <!-- Show Account Detail -->
+<div  ng-show="accountShow">
+  <a class="btn btn-xm" ng-click="hide()" ng-show="accountShow">Esconder</a>
+
+        <div class="container">
+            <section id="title-bar">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h1>Bienvenido(a) {{name}}</h1>
+                        <p>Está es la informacion general de su cuenta</p>
+                      </div>
+                    </div>
+                  </div>
+            </section>  
+            
+            <div class="panel-group">
+            <a class="btn btn-default pull-right" ng-click="hide()" ng-show="accountShow">Esconder</a>
+                <div class="panel panel-default">
+                  <div class="panel-heading">General </div>
+                  <div class="panel-body">
+                    <ul>
+                      <li><strong>Nombre: </strong>{{name}}</li>
+                      <li><strong>Tipo: </strong>{{tipo}}</li>
+                      <li><strong>Moneda: </strong>{{moneda}}</li>
+                      
+                    </ul> 
+
+
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">Transacciones</div>
+                  <div class="panel-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Detalle</th>
+                          <th>Monto</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr >
+                          <td>{{date}}</td>
+                          <td>{{detail}}</td>
+                          <td>{{amount}}</td>
+                          <td><a ng-click="showEditForm()">Ver</a></td>
+                        </tr>
+                        <!-- <tr>
+                          <td>06/11/18</td>
+                          <td>Cena en La Aurora</td>
+                          <td>$6000</td>
+                          <td><a ng-click="showEditForm(account)">Editar</a> <a ng-click="removeAccount(account)">Remover</a></td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+                
+
+
+
+            
+          </div>
+          <!-- End of Resumen -->
+
+
 
           <!-- Detalle de Transacciones -->
-          <div>
+          <!-- <div>
             
 
           <section id="title-bar">
@@ -180,48 +281,10 @@
                 </div>
           </section> 
 
-          </div>
-          <!-- End of Detalle de transacciones -->
-          <!-- Resumen -->
-        <div>
-            <section id="title-bar">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <h1>Bienvenido {{account.name}}</h1>
-                        <p>Estas son sus últimas transacciones en su cuenta {{account.balance}}</p>
-                      </div>
-                    </div>
-                  </div>
-            </section>  
-
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Detalle</th>
-                  <th>Monto</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="account in accounts">
-                  <td>{{account.date}}</td>
-                  <td>{{account.detail}}</td>
-                  <td>{{account.amount}}</td>
-                  <td><a ng-click="showEditForm()">Ver</a></td>
-                </tr>
-                <!-- <tr>
-                  <td>06/11/18</td>
-                  <td>Cena en La Aurora</td>
-                  <td>$6000</td>
-                  <td><a ng-click="showEditForm(account)">Editar</a> <a ng-click="removeAccount(account)">Remover</a></td>
-                </tr> -->
-              </tbody>
-            </table>
-          </div>
-          <!-- End of Resumen -->
-
+          </div> -->
+          
+</div>   
+<!-- End of Detalle de transacciones -->
 
 
 

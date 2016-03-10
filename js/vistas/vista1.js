@@ -22,6 +22,10 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 		$scope.addMovementShow = true;
 	}
 
+	$scope.hide = function(){
+		$scope.accountShow = false;
+	}
+
 	$scope.addFormSubmit = function(){
 		console.log('Adding Account...');
 		if($scope.name){ var name = $scope.name; } else { var name = null; }
@@ -44,6 +48,15 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 		});
 
 	}
+
+	$scope.showAccount = function(account){
+		$scope.name = account.name;
+		$scope.tipo = account.tipo.singleSelect;
+		$scope.moneda = account.moneda.singleSelect;
+
+		$scope.accountShow = true;
+	}
+
 	function clearFields(){
 		$scope.name = "";
 		$scope.tipo = "";
@@ -53,6 +66,8 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 	$scope.addMovementSubmit = function(){
 		console.log('Adding Movement...');
 	}
+
+
 
 }]);
 
