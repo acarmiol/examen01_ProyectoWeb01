@@ -1,7 +1,7 @@
 <div ng-controller="Vista1Ctrl">
 <div  class="alert alert-info" ng-show="msg">{{msg}}</div>
 <a type="button" class="btn btn-success" ng-click="showAddForm()">Crear Cuenta</a>
-<a type="button" class="btn btn-info" ng-click="showAddMovement()">Crear Movimientos</a>
+<!-- <a type="button" class="btn btn-info" ng-click="showAddMovement()">Crear Movimientos</a> -->
         
           <div class="container">
           <div class="row">
@@ -27,6 +27,7 @@
               <div class="row">
                 <div class="col-md-4">
                     <form  ng-submit="addFormSubmit()">
+
                         <div class="form-group">
                           <label>Dueño</label>
                           <input type="text" class="form-control" ng-model="name" />
@@ -45,6 +46,24 @@
                                 <option value="$">dolares</option>
                               </select>
                         </div>
+<!-- adicional -->
+                        <div class="hidden">
+                          <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" id="" ng-model="fecha.value" />
+                          </div>
+                          <div class="form-group">
+                            <label >Monto</label>
+                            <input type="number" class="form-control" id="" min="0" ng-model="amount" />
+                          </div>
+                          <div class="form-group">
+                            <label >Detalle</label>
+                            <textarea class="form-control" rows="2" ng-model="detail"></textarea>
+                          </div>
+                        
+                        </div>
+
+                        <!-- end of adicional -->
                         <!-- <div class="form-group">
                           <label >Movimientos</label>
 
@@ -65,9 +84,64 @@
           </div>
           <!-- End of Registro -->
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" ng-show="editFormShow">
+         
+
+                        <form ng-submit="editFormSubmit()">
+                            <h3>Edit Account</h3>
+                            <!-- Add Form -->
+
+                            <div class="form-group">
+                          <label>Dueño</label>
+                          <input type="text" class="form-control" ng-model="name" />
+                        </div>
+                       <div class="form-group">
+                          <label >Tipo</label>
+                          <select class="form-control" ng-model="tipo.singleSelect">
+                                <option value="corriente">corriente</option>
+                                <option value="ahorro">ahorros</option>
+                              </select>
+                        </div>
+                        <div class="form-group">
+                          <label >Moneda</label>
+                          <select class="form-control" ng-model="moneda.singleSelect">
+                                <option value="₡">colones</option>
+                                <option value="$">dolares</option>
+                              </select>
+                        </div>
+<!-- adicional -->
+                        
+                          <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" id="" ng-model="fecha" />
+                          </div>
+                          <div class="form-group">
+                            <label >Monto</label>
+                            <input type="number" class="form-control" id="" min="0" ng-model="amount" />
+                          </div>
+                          <div class="form-group">
+                            <label >Detalle</label>
+                            <textarea class="form-control" rows="2" ng-model="detail"></textarea>
+                          </div>
+                        
+                       
+                            
+                          
+
+
+                           <div class="row">
+                              <div class="large-12 columns">
+                                  <input type="submit" value="Update Account" class="btn btn-default" />
+                              </div>
+                           </div>
+                        </form> 
+
+
+
+          
+
           <!-- Editar Registro y Movimiento -->
-          <div ng-show="addMovementShow">
+          <!-- <div ng-show="addMovementShow">
            
             <section id="title-bar">
                   <div class="container">
@@ -86,7 +160,7 @@
                     <form ng-submit="addMovementSubmit()">
                       <div class="form-group">
                         <label>Fecha</label>
-                        <input type="date" class="form-control" id="" ng-model="date" />
+                        <input type="date" class="form-control" id="" ng-model="dia" />
                       </div>
                       <div class="form-group">
                         <label >Monto</label>
@@ -103,8 +177,9 @@
                 </div> 
             </div>
 
+
            
-          </div>
+          </div> -->
           <!-- End of Editar y Agregar Movimiento -->
           </div>
 
@@ -143,7 +218,8 @@
                 <td>{{accounts.tipo.singleSelect}}</td>
                 <td>{{accounts.moneda.singleSelect}}</td>
                 <td>
-                  <a  ng-click="showEditForm(accounts)" class="btn btn-warning btn-xs">Editar </a> 
+                  <a   class="btn btn-warning btn-xs" ng-click="showEditForm(accounts)">Editar </a> 
+                 <!--  ng-click="showEditForm(accounts)" -->
                   <a ng-click="removeAccount(accounts)" class="btn btn-danger btn-xs">Remover</a>
                   <a class="btn btn-link btn-xs">ver movimientos</a>
                 </td>
@@ -204,7 +280,7 @@
                       </thead>
                       <tbody>
                         <tr >
-                          <td>{{date}}</td>
+                          <td>{{fecha | date}</td>
                           <td>{{detail}}</td>
                           <td>{{amount}}</td>
                           <td><a ng-click="showEditForm()">Ver</a></td>
