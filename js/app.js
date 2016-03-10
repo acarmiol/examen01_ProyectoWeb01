@@ -3,6 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  'firebase',
+  
   'myApp.vista1',
   'myApp.vista2',
   'myApp.vista3',

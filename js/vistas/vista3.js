@@ -1,4 +1,4 @@
-angular.module('myApp.vista3', ['ngRoute'])
+angular.module('myApp.vista3', ['ngRoute','firebase'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/vista3', {
@@ -7,6 +7,6 @@ angular.module('myApp.vista3', ['ngRoute'])
   });
 }])
 
-.controller('Vista3Ctrl', [function() {
-
+.controller('Vista3Ctrl', ['$scope', '$firebase', function($scope, $firebaseArray) {
+	console.log($scope)
 }]);

@@ -1,4 +1,4 @@
-angular.module('myApp.vista2', ['ngRoute'])
+angular.module('myApp.vista2', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/vista2', {
@@ -7,6 +7,6 @@ angular.module('myApp.vista2', ['ngRoute'])
   });
 }])
 
-.controller('Vista2Ctrl', [function() {
-
+.controller('Vista2Ctrl', ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
+	console.log($scope)
 }]);

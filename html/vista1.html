@@ -1,47 +1,246 @@
-<section id="title-bar">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Registro</h1>
-          </div>
-        </div>
-      </div>
-</section>  
+<div ng-controller="Vista1Ctrl">
+<div  class="alert alert-info" ng-show="msg">{{msg}}</div>
+<a type="button" class="btn btn-success" ng-click="showAddForm()">Crear Cuenta</a>
+<a type="button" class="btn btn-info" ng-click="showAddMovement()">Crear Movimientos</a>
+        
+          <div class="container">
+          <div class="row">
+            <div class="col-md-6">
 
-
-<div class="container">
-  <div class="row"> 
-    <div class="col-md-6">   
-        <form>
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" id="" placeholder="ingresar nombre">
-          </div>
-          <div class="form-group">
-            <label >Tipo</label>
-            <select class="form-control">
-                  <option>corriente</option>
-                  <option>ahorros</option>
-                </select>
-          </div>
-          <div class="form-group">
-            <label >Moneda</label>
-            <select class="form-control">
-                  <option>colones</option>
-                  <option>dolares</option>
-                </select>
-          </div>
-          <div class="form-group">
-            <label >Movimientos</label>
-            <a href="">Detalle</a>
-          </div>
-          <div class="form-group">
-            <label>Saldo</label>
-            <a href="">ver balnce</a>
-          </div>
+            
+            
           
-          <button type="submit" class="btn btn-default">Crear</button>
-        </form>
-      </div>
-    </div> 
-</div>
+
+          <!-- Registro -->
+
+          <div ng-show="addFormShow">
+            <section id="title-bar">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h1>Registrar</h1>
+                      </div>
+                    </div>
+                  </div>
+            </section>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                    <form  ng-submit="addFormSubmit()">
+                        <div class="form-group">
+                          <label>Dueño</label>
+                          <input type="text" class="form-control" ng-model="name" />
+                        </div>
+                       <div class="form-group">
+                          <label >Tipo</label>
+                          <select class="form-control" ng-model="tipo.singleSelect">
+                                <option value="corriente">corriente</option>
+                                <option value="ahorro">ahorros</option>
+                              </select>
+                        </div>
+                        <div class="form-group">
+                          <label >Moneda</label>
+                          <select class="form-control" ng-model="moneda.singleSelect">
+                                <option value="₡">colones</option>
+                                <option value="$">dolares</option>
+                              </select>
+                        </div>
+                        <!-- <div class="form-group">
+                          <label >Movimientos</label>
+
+                          <a type="button" class="btn btn-info" ng-click="showAddMovement()">Crear Movimientos</a>
+                        </div> -->
+                        <!-- <div class="form-group">
+                          <label>Saldo</label>
+                          <a href="">ver balance</a>
+                        </div> -->
+                        
+                        <input type="submit" class="btn btn-default" value="Crear Cuenta" />
+                      </form>
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
+          <!-- End of Registro -->
+          </div>
+          <div class="col-md-6">
+          <!-- Agregar Movimiento -->
+          <div ng-show="addMovementShow">
+           
+            <section id="title-bar">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h1>Movimientos Nuevos</h1>
+                      </div>
+                    </div>
+                  </div>
+            </section>  
+
+
+            <div class="container">
+              <div class="row"> 
+                <div class="col-md-4">   
+                    <form ng-submit="addMovementSubmit()">
+                      <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" id="" ng-model="date" />
+                      </div>
+                      <div class="form-group">
+                        <label >Monto</label>
+                        <input type="number" class="form-control" id="" min="0" ng-model="amount" />
+                      </div>
+                      <div class="form-group">
+                        <label >Detalle</label>
+                        <textarea class="form-control" rows="2" ng-model="detail"></textarea>
+                      </div>
+                      
+                      <input type="submit" class="btn btn-default" value="Agregar" />
+                    </form>
+                  </div>
+                </div> 
+            </div>
+
+           
+          </div>
+          <!-- End of Agregar Movimiento -->
+          </div>
+
+          </div>
+          </div>
+
+          <!-- Registro/Lista de Cuentas -->
+          <div>
+          <section id="title-bar">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h1>Detalle de Transacción</h1>
+                      <p>A continuación el detalle de su transacción efectuada 02/15/16.</p>
+
+                    </div>
+                  </div>
+                </div>
+          </section>
+
+
+          </div>
+          <!-- End of Lista de Cuentas -->
+
+
+          <!-- Detalle de Transacciones -->
+          <div>
+            
+
+          <section id="title-bar">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h1>Detalle de Transacción</h1>
+                      <p>A continuación el detalle de su transacción efectuada 02/15/16.</p>
+
+                    </div>
+                  </div>
+                </div>
+          </section>  
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Transacción #</th>
+                <th>Fecha</th>
+                <th>Detalle</th>
+                <th>Monto</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{account.transaction}}</td>
+                <td>02/04/19</td>
+                <td>Compras Super</td>
+                <td>$150</td>
+                <td><a href="" title="">Editar</a> | <a href="">Eliminar</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <section id="title-bar">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h1>Editar Transacción</h1>
+                      
+
+                    </div>
+                  </div>
+                </div>
+          </section> 
+
+          </div>
+          <!-- End of Detalle de transacciones -->
+          <!-- Resumen -->
+        <div>
+            <section id="title-bar">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h1>Bienvenido {{account.name}}</h1>
+                        <p>Estas son sus últimas transacciones en su cuenta {{account.balance}}</p>
+                      </div>
+                    </div>
+                  </div>
+            </section>  
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Detalle</th>
+                  <th>Monto</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="account in accounts">
+                  <td>{{account.date}}</td>
+                  <td>{{account.detail}}</td>
+                  <td>{{account.amount}}</td>
+                  <td><a ng-click="showEditForm()">Ver</a></td>
+                </tr>
+                <!-- <tr>
+                  <td>06/11/18</td>
+                  <td>Cena en La Aurora</td>
+                  <td>$6000</td>
+                  <td><a ng-click="showEditForm(account)">Editar</a> <a ng-click="removeAccount(account)">Remover</a></td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <!-- End of Resumen -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> <!-- End of Vista1Ctrl -->
+
+
+
+  
+    
+
+    
+    
+
