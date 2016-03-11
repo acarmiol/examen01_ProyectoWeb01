@@ -12,3 +12,10 @@ li{
 	line-height: 1.8em;
 	
 }
+
+.sortorder:after {
+  content: '\25b2';
+}
+.sortorder.reverse:after {
+  content: '\25bc';
+}

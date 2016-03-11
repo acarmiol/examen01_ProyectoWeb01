@@ -7,7 +7,7 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
   });
 }])
 
-.controller('Vista1Ctrl', ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
+.controller('Vista1Ctrl', ['$scope', '$firebaseArray', '$filter', function($scope, $firebaseArray, $filter) {
 
 	var ref = new Firebase('https://mybankacct.firebaseio.com/account');
 
@@ -23,13 +23,21 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 		$scope.id = account.$id;
 
-		$scope.name = $scope.name;
-		$scope.tipo = $scope.tipo;
-		$scope.moneda = $scope.moneda;
+		$scope.name = accounts.name;
+		$scope.tipo = accounts.tipo.singleSelect;
+		$scope.moneda = accounts.moneda.singleSelect;
 
-		$scope.movements.fecha = $scope.fecha;
-		$scope.movements.amount = $scope.amount;
-		$scope.movements.detail = $scope.detail;
+		
+
+		$scope.movements.fecha = accounts[0].fecha;
+		$scope.movements.amount = accounts[0].amount;
+		$scope.movements.detail = account[0].detail;
+
+
+
+		$scope.name = account.name;
+		$scope.tipo = account.tipo.singleSelect;
+		$scope.moneda = account.moneda.singleSelect;
 
 	}
 
@@ -68,6 +76,8 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 		}).then(function(ref){
 			var id = ref.key();
+
+			console.log('contact id:' +id)
 			
 
 			clearFields();
@@ -84,7 +94,7 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 		var id = $scope.id;
 
-		var record = $scope.accounts.$getRecord(id);
+		var record = $scope.account.$getRecord(id);
 
 		record.name = $scope.name;
 		record.tipo = $scope.tipo.singleSelect;
@@ -97,12 +107,16 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 
 
-		$scope.accounts.$save(record).then(function(ref){
+		$scope.account.$save(record).then(function(ref){
 			console.log(ref.key);
 		});
 		clearFields();
 
+		$scope.editFormShow = false;
+
 		$scope.msg = "cuenta actualizada";
+
+
 	}
 
 
@@ -110,6 +124,10 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 		$scope.name = account.name;
 		$scope.tipo = account.tipo.singleSelect;
 		$scope.moneda = account.moneda.singleSelect;
+
+		// $scope.fecha =  account.movements[0].fecha;
+		// $scope.amount = account.movements[0].amount;
+		// $scope.detail = account.movements[0].detail;
 
 		$scope.accountShow = true;
 	}
@@ -126,7 +144,18 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 		$scope.name = "";
 		$scope.tipo = "";
 		$scope.moneda = "";
+		$scope.fecha = "";
+		$scope.amount = "";
+		$scope.detail = "";
 	}
+
+	var orderBy = $filter('orderBy');
+
+	$scope.order = function(predicate) {
+	    $scope.predicate = predicate;
+	    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+	    $scope.account = orderBy($scope.account, predicate, $scope.reverse);
+	  };
 
 	
 

@@ -62,17 +62,6 @@
                           </div>
                         
                         </div>
-
-                        <!-- end of adicional -->
-                        <!-- <div class="form-group">
-                          <label >Movimientos</label>
-
-                          <a type="button" class="btn btn-info" ng-click="showAddMovement()">Crear Movimientos</a>
-                        </div> -->
-                        <!-- <div class="form-group">
-                          <label>Saldo</label>
-                          <a href="">ver balance</a>
-                        </div> -->
                         
                         <input type="submit" class="btn btn-default" value="Crear Cuenta" />
                       </form>
@@ -201,19 +190,23 @@
                   </div>
                 </div>
           </section>
-
+          
           <table class="table table-striped">
+
             <thead>
               <tr >
-                <th>Clientes</th>
-                <th>Tipo de Cuenta</th>
-                <th>Moneda</th>
+                <th><button ng-click="order('name')">Clientes</button>
+          <span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span></th>
+                <th><button ng-click="order('name')">Tipo de Cuenta</button>
+          <span class="sortorder" ng-show="predicate === 'tipo'" ng-class="{reverse:reverse}"></span></th>
+                <th><button ng-click="order('moneda')">Tipo de Cuenta</button>
+          <span class="sortorder" ng-show="predicate === 'moneda'" ng-class="{reverse:reverse}"></span></th>
                 <th>Acciones</th>
                 
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="accounts in account">
+              <tr ng-repeat="accounts in account | orderBy:predicate:reverse">
                 <td><a ng-click="showAccount(accounts)" class="btn btn-link">{{accounts.name}} </a></td>
                 <td>{{accounts.tipo.singleSelect}}</td>
                 <td>{{accounts.moneda.singleSelect}}</td>
@@ -221,7 +214,7 @@
                   <a   class="btn btn-warning btn-xs" ng-click="showEditForm(accounts)">Editar </a> 
                  <!--  ng-click="showEditForm(accounts)" -->
                   <a ng-click="removeAccount(accounts)" class="btn btn-danger btn-xs">Remover</a>
-                  <a class="btn btn-link btn-xs">ver movimientos</a>
+                  
                 </td>
               </tr>
             </tbody>
@@ -237,7 +230,7 @@
  <!-- Resumen -->
  <!-- Show Account Detail -->
 <div  ng-show="accountShow">
-  <a class="btn btn-xm" ng-click="hide()" ng-show="accountShow">Esconder</a>
+  
 
         <div class="container">
             <section id="title-bar">
@@ -252,7 +245,7 @@
             </section>  
             
             <div class="panel-group">
-            <a class="btn btn-default pull-right" ng-click="hide()" ng-show="accountShow">Esconder</a>
+            <a class="btn btn-default pull-right"  ng-show="accountShow">Esconder</a>
                 <div class="panel panel-default">
                   <div class="panel-heading">General </div>
                   <div class="panel-body">
@@ -280,7 +273,7 @@
                       </thead>
                       <tbody>
                         <tr >
-                          <td>{{fecha | date}</td>
+                          <td>{{fecha | date}}</td>
                           <td>{{detail}}</td>
                           <td>{{amount}}</td>
                           <td><a ng-click="showEditForm()">Ver</a></td>
