@@ -18,10 +18,10 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 	}
 
-	$scope.showEditForm = function(account){
+	$scope.showEditForm = function(accounts){
 		$scope.editFormShow = true;
 
-		$scope.id = account.$id;
+		$scope.id = accounts.$id;
 
 		$scope.name = accounts.name;
 		$scope.tipo = accounts.tipo.singleSelect;
@@ -31,13 +31,11 @@ angular.module('myApp.vista1', ['ngRoute', 'firebase'])
 
 		$scope.movements.fecha = accounts[0].fecha;
 		$scope.movements.amount = accounts[0].amount;
-		$scope.movements.detail = account[0].detail;
+		$scope.movements.detail = accounts[0].detail;
 
 
 
-		$scope.name = account.name;
-		$scope.tipo = account.tipo.singleSelect;
-		$scope.moneda = account.moneda.singleSelect;
+		
 
 	}
 

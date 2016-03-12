@@ -183,7 +183,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
-                      <h1>Lista de Cuentas || Total: {{account.length}}</h1>
+                      <h1>Cuentas (Total: {{account.length}}):</h1>
               
 
                     </div>
@@ -196,7 +196,7 @@
             <thead>
               <tr >
                 <th><button ng-click="order('name')">Clientes</button>
-          <span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span></th>
+          <span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>(Detalle)</th>
                 <th><button ng-click="order('name')">Tipo de Cuenta</button>
           <span class="sortorder" ng-show="predicate === 'tipo'" ng-class="{reverse:reverse}"></span></th>
                 <th><button ng-click="order('moneda')">Tipo de Cuenta</button>
@@ -230,9 +230,7 @@
  <!-- Resumen -->
  <!-- Show Account Detail -->
 <div  ng-show="accountShow">
-  
-
-        <div class="container">
+          <div class="container">
             <section id="title-bar">
                   <div class="container">
                     <div class="row">
@@ -272,7 +270,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr >
+                        <tr accounts in account>
                           <td>{{fecha | date}}</td>
                           <td>{{detail}}</td>
                           <td>{{amount}}</td>
